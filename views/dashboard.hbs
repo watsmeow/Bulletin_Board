@@ -1,1 +1,39 @@
-<h1>Dashboard</h1>
+<h2>Welcome {{name}}</h2>
+<h5>Your notes:</h5>
+
+{{#if notes}}
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each notes}}
+            <tr>
+                <td><a href="/notes/{{_id}}">{{title}}</a></td>
+                <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+                <td><span class="dash-status">{{status}}</span></td>
+                <td>
+                    <a href="/notes/edit/{{_id}}" class="btn btn-float purple lighten-1">
+                        <i class="fa-solid fa-pen fa-small"></i>
+                    </a>
+
+                    <form action="/notes/{{_id}}" method="POST" id="delete-form">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn red lighten-1" type="submit">
+                            <i class="fa-solid fa-eraser fa-small"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+{{else}}
+    <p>You haven't written any notes yet.</p>
+{{/if}}

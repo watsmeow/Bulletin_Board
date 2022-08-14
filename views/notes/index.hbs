@@ -1,0 +1,26 @@
+<h2>Public bulletin board:</h2>
+<div class="row">
+    {{#each notes}}
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    {{{editIcon user ../user _id}}}
+                </div>
+                <div class="card-content center-align">
+                    <h4>{{Title}}</h4>
+                    <p>{{stripTags (truncate body 150)}}</p>
+                    <br>
+                    <div class="chip">
+                        <img src="{{user.image}}" alt="">
+                        <a href="/notes/user/{{user._id}}">{{user.displayName}}</a>
+                    </div>
+                </div>
+                <div class="card-action center-align">
+                    <a href="/notes/{{_id}}" class="btn blue">More</a>
+                </div>
+            </div>
+        </div>
+    {{else}}
+    <p>No public notes. Be the first to share a public note of your own!</p>
+    {{/each}}
+</div>
